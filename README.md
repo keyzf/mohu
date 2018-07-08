@@ -1,0 +1,5 @@
+# Mohu App
+
+## LICENSE
+
+MIT
