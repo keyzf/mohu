@@ -176,14 +176,32 @@ const menu = Menu.buildFromTemplate(template)
 const refresh_menu = () => {
     menu.getMenuItemById("goBack").enabled = mainWindow.webContents.canGoBack()
     menu.getMenuItemById("goForward").enabled = mainWindow.webContents.canGoForward()
+    contextMenu.getMenuItemById("context_goBack").enabled = mainWindow.webContents.canGoBack()
+    contextMenu.getMenuItemById("context_goForward").enabled = mainWindow.webContents.canGoForward()
 
 }
 
 //给文本框增加右键菜单
 const contextMenuTemplate = [
-    // {  label: "转到上一页",role: 'undo' }, //Undo菜单项
-    // { role: 'redo' }, //Redo菜单项 
-    // { type: 'separator' }, //分隔线 
+    {
+        label: "转到上一页",
+        id: "context_goBack",
+        enabled: false,
+        click: () => {
+            mainWindow.webContents.goBack();
+
+        }
+    },
+    {
+        label: "转到下一页",
+        id: "context_goForward",
+        enabled: false,
+        click: () => {
+            mainWindow.webContents.goForward()
+
+        }
+    },
+    { type: 'separator' }, //分隔线 
     { label: "剪切", role: 'cut' }, //Cut菜单项 
     { label: "复制", role: 'copy' }, //Copy菜单项 
     { label: "粘贴", role: 'paste' }, //Paste菜单项 
@@ -199,6 +217,7 @@ function createWindow() {
     landingWindow = new BrowserWindow({
         show: false,
         frame: isDev,
+        title:"膜乎APP",
         icon: path.join(__dirname, 'logo.png'),
         width: 490,
         height: 400
@@ -216,6 +235,7 @@ function createWindow() {
             width: 1100,
             height: 740,
             icon: path.join(__dirname, 'logo.png'),
+            title:"膜乎APP",
             show: false,
             webPreferences: {
                 nodeIntegration: false, // 不集成 Nodejs
@@ -282,5 +302,6 @@ ipcMain.on("reload", () => {
 })
 
 ipcMain.on("right_btn", () => {
+    refresh_menu()
     contextMenu.popup(mainWindow);
 })

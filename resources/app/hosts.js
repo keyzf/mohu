@@ -73,10 +73,15 @@ const add_host = () => {
                 console.log(msg)
                 dialog.showMessageBox({
                     type: "error",
-                    buttons: ["确定"],
+                    buttons: ["输入sudo密码", "取消"],
                     defaultId: 0,
+                    cancelId: 1,
                     title: "添加hosts失败!",
                     message: msg,
+                }, (response, checkboxChecked) => {
+                    if (response == 0) {
+
+                    }
                 })
             }
         }

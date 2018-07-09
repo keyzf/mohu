@@ -1,6 +1,6 @@
 const https = require('https');
 
-module.exports = (url,f) => {
+module.exports = (url, callback) => {
 
     https.get(url, (res) => {
         const { statusCode } = res;
@@ -19,7 +19,7 @@ module.exports = (url,f) => {
             res.on('end', () => {
                 try {
                     const parsedData = JSON.parse(rawData);
-                    f(parsedData)
+                    callback(parsedData)
                 } catch (e) {
                     throw e;
                 }
