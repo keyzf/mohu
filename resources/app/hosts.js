@@ -2,7 +2,8 @@ const process = require("process");
 const fs = require("fs");
 const path = require('path');
 const platform = process.platform;
-const { dialog, shell, BrowserWindow } = require('electron')
+const { dialog, shell, BrowserWindow, ipcMain } = require('electron')
+const { exec } = require('child_process')
 
 // Windows 系统有可能不安装在 C 盘
 const sys_hosts_path = platform === 'win32' ? `${process.env.windir || 'C:\\WINDOWS'}\\system32\\drivers\\etc\\hosts` : '/etc/hosts'
@@ -22,8 +23,72 @@ const main_host_is_existed = () => {
     return i >= 0;
 }
 
-const get_sudo_pswd = () => {
+function needPswd(str) {
+    str = str.toLowerCase()
 
+    console.log('---')
+    console.log(str)
+    let keys = [
+        'Permission denied'
+        , 'incorrect password'
+        , 'Password:Sorry, try again.'
+    ]
+    return !!keys.find(k => str.includes(k.toLowerCase()))
+}
+
+const get_sudo_pswd = () => {
+    var sudo_pswd_win = new BrowserWindow({
+        frame: false,
+        title: "请输入您的sudo密码 (开机密码)",
+        icon: path.join(__dirname, 'logo.png'),
+        width: 600,
+        height: 100
+    })
+
+    sudo_pswd_win.loadURL(`file://${__dirname}/sudo_passwd.html`)
+
+    ipcMain.once("sudo_passwd", (event, arg) => {
+        // console.log(arg)
+        const sudo_pswd = arg
+        const cmd = [
+            `echo '${sudo_pswd}' | sudo -S chmod 777 ${sys_hosts_path}`
+            , `echo "${host}" >> ${sys_hosts_path}`
+            , `echo '${sudo_pswd}' | sudo -S chmod 644 ${sys_hosts_path}`
+        ].join(' && ')
+
+        exec(cmd, function (error, stdout, stderr) {
+            // command output is in stdout
+            if (!error) {
+                dialog.showMessageBox({
+                    type: "info",
+                    buttons: ["确定"],
+                    defaultId: 0,
+                    title: "添加hosts成功!",
+                    message: `'${host}' 已被添加到您的hosts文件中`,
+                }, (response, checkboxChecked) => {
+                    if (response == 0) {
+                        BrowserWindow.fromId(2).webContents.reload();
+                    }
+                })
+            }
+            else {
+                msg = needPswd(stdout + stderr) ? 'sudo密码错误' : error
+                dialog.showMessageBox({
+                    type: "error",
+                    buttons: ["重试", "取消"],
+                    defaultId: 0,
+                    cancelId: 1,
+                    title: "修改hosts文件失败",
+                    message: msg,
+                }, (response, checkboxChecked) => {
+                    if (response == 0) {
+                        get_sudo_pswd()
+                    }
+                })
+            }
+        })
+
+    })
 }
 
 const add_host = () => {
@@ -69,7 +134,7 @@ const add_host = () => {
                 })
             }
             else {
-                msg = `${msg}\n\n请使用sudo或使用root身份运行本程序`
+                msg = `${msg}\n\n请使用sudo命令或使用root身份运行本程序`
                 console.log(msg)
                 dialog.showMessageBox({
                     type: "error",
@@ -80,7 +145,7 @@ const add_host = () => {
                     message: msg,
                 }, (response, checkboxChecked) => {
                     if (response == 0) {
-
+                        get_sudo_pswd()
                     }
                 })
             }
@@ -145,4 +210,5 @@ const init_hosts = () => {
 module.exports = {
     init_hosts: init_hosts,
     main_host_is_existed: main_host_is_existed,
+    get_sudo_pswd: get_sudo_pswd
 }

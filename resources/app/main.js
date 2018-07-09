@@ -1,7 +1,7 @@
 const electron = require('electron');
 const fs = require("fs");
 const path = require('path');
-const { init_hosts,main_host_is_existed } = require("./hosts")
+const { init_hosts,main_host_is_existed,get_sudo_pswd } = require("./hosts")
 const { check_update, manual_check_update } = require("./check_update")
 const copy_current_url = require("./copy_current_url")
 
@@ -135,7 +135,7 @@ const template = [
             {
                 label: '切换开发者工具',
                 accelerator: "F12",
-                click() { mainWindow.webContents.toggleDevTools(); }
+                click() { BrowserWindow.getFocusedWindow().webContents.toggleDevTools(); }
             },
         ]
     },
@@ -168,6 +168,11 @@ const template = [
                 label: '关于',
                 click() { shell.openExternal("https://github.com/Xmader/mohu") }
             },
+            {
+                label: 'Linux获取sudo密码',
+                click() { get_sudo_pswd() }
+            },
+            
         ]
     },
 
@@ -240,7 +245,7 @@ function createWindow() {
             webPreferences: {
                 nodeIntegration: false, // 不集成 Nodejs
                 // webSecurity: false,//禁用同源策略
-                // allowRunningInsecureContent:true//允许一个 https 页面运行 http url 里的资源
+                // allowRunningInsecureContent:true,//允许一个 https 页面运行 http url 里的资源
                 preload: path.join(__dirname, 'pre.js') // 但预加载的 js 文件内仍可以使用 Nodejs 的 API
             }
         })
