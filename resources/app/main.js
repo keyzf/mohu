@@ -122,10 +122,6 @@ function createWindow() {
             check_update()
         })
 
-        mainWindow.webContents.on("will-navigate", (ev) => {
-            ev.preventDefault();
-        })
-
         mainWindow.webContents.on('did-finish-load', () => {
             if (!mainWindow) {
                 throw new Error('"mainWindow" is not defined');
@@ -139,10 +135,6 @@ function createWindow() {
             mainWindow.webContents.loadURL(url)
         })
 
-        mainWindow.webContents.on('will-navigate', (event, url) => {
-            event.preventDefault()
-            mainWindow.webContents.loadURL(url)
-        })
 
         mainWindow.on("close", function (event) {
             if (process.platform === "darwin" && !forceQuit) {

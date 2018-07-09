@@ -11,10 +11,10 @@ var DownloadUrl = `https://xmader.oss-cn-shanghai.aliyuncs.com/mohu-${_platform}
 var version_formatted = format_version(version)
 
 var download_remote_version = function () {
-    const url = "https://raw.githubusercontent.com/Xmader/hydrogen/windows/hydrogen-version.json"
-    // const url = versionCheckApi
+    // const url = "https://raw.githubusercontent.com/Xmader/hydrogen/windows/hydrogen-version.json"
+    const url = versionCheckApi
 
-    const f = (data) => {
+    get_json(url, (data) => {
         var new_version = data["version"] // get_new_version
         var new_version_formatted = format_version(new_version)
         if (version_formatted < new_version_formatted) {
@@ -23,9 +23,9 @@ var download_remote_version = function () {
                 buttons: ["下载", "取消"],
                 defaultId: 0,
                 cancelId: 1,
-                title: `发现新版本${new_version}!`,
+                title: `发现新版本!`,
                 message: "是否要下载新版本?",
-                //detail:"",
+                detail:`当前版本: ${version} ,\n新版本: ${new_version} `,
                 icon: path.join(__dirname, './logo.png'),
             }, (response, checkboxChecked) => {
                 if (response == 0) {
@@ -33,8 +33,7 @@ var download_remote_version = function () {
                 }
             })
         }
-    }
-    get_json(url, f)
+    })
 }
 
 
