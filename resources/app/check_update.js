@@ -5,10 +5,15 @@ const { dialog, shell, app } = require('electron')
 
 
 var _platform = process.platform == "win32" ? "windows" : "linux";
+var platform = process.platform;
+var arch = process.arch
+arch = (arch == "arm") ? "armv7l" : arch
+arch = (arch == "x32") ? "ia32" : arch
+
 var version = app.getVersion()/*当前版本号, 在package.json中定义*/
 // var versionCheckApi = "https://raw.githubusercontent.com/Xmader/mohu/master/version.json"/*检查更新Api地址*/
 var versionCheckApi = "https://raw.githubusercontent.com/Xmader/mohu/master/resources/app/package.json"
-var DownloadUrl = `https://xmader.oss-cn-shanghai.aliyuncs.com/mohu-${_platform}.zip`
+var DownloadUrl = `https://xmader.oss-cn-shanghai.aliyuncs.com/MohuAPP-${platform}-${arch}.zip`
 var version_formatted = format_version(version)
 
 var find_new_version = (new_version) => {
