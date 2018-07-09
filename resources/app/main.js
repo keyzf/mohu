@@ -61,7 +61,14 @@ const template = [
                 click: () => {
                     BrowserWindow.getFocusedWindow().webContents.loadURL(`file://${__dirname}/bao/index.html`)
                 }
-            }
+            },
+            {
+                label: "Flappy Frog",
+
+                click: () => {
+                    BrowserWindow.getFocusedWindow().webContents.loadURL(`file://${__dirname}/flappy_frog/index.html`)
+                }
+            },
         ]
     },
     {
