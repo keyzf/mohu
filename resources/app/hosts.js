@@ -16,7 +16,7 @@ const host_is_existed = (data) => {
     return i >= 0;
 }
 
-const main_host_is_existed = () =>{
+const main_host_is_existed = () => {
     data = fs.readFileSync(sys_hosts_path, "utf-8")
     var i = data.indexOf(host);
     return i >= 0;
@@ -29,7 +29,30 @@ const get_sudo_pswd = () => {
 const add_host = () => {
     fs.writeFile(sys_hosts_path, "\n" + host + "\n", { flag: "a" }, (err) => {
         if (err) {
-            throw err
+            console.log(e)
+            let msg = e.message
+            if (platform === 'win32') {
+                msg = `${msg}\n\n请以管理员身份运行本程序,\n或 进入${path.dirname(sys_hosts_path)}文件夹, 右键hosts属性-安全-高级-权限-添加-选择主体-高级-立即查找-找到你现在的账户-勾选完全控制-一路确定即可添加对hosts文件的修改权限`
+                console.log(msg)
+                dialog.showMessageBox({
+                    type: "error",
+                    buttons: ["确定"],
+                    defaultId: 0,
+                    title: "添加hosts失败!",
+                    message: msg,
+                })
+            }
+            else{
+                msg = `${msg}\n\n请使用sudo或使用root身份运行本程序`
+                console.log(msg)
+                dialog.showMessageBox({
+                    type: "error",
+                    buttons: ["确定"],
+                    defaultId: 0,
+                    title: "添加hosts失败!",
+                    message: msg,
+                })
+            }
         }
         else {
             dialog.showMessageBox({
@@ -40,7 +63,7 @@ const add_host = () => {
                 message: `'${host}' 已被添加到您的hosts文件中 `,
             }, (response, checkboxChecked) => {
                 if (response == 0) {
-                    BrowserWindow.getFocusedWindow().webContents.reload();
+                    BrowserWindow.fromId(2).webContents.reload();
                 }
             })
         }
