@@ -2,7 +2,7 @@ const electron = require('electron');
 const fs = require("fs");
 const path = require('path');
 const { init_hosts } = require("./hosts")
-const check_update = require("./check_update")
+const {check_update,manual_check_update} = require("./check_update")
 
 var { app, BrowserWindow, ipcMain, Menu } = electron;
 let mainWindow = null, landingWindow = null, locale;
@@ -78,6 +78,10 @@ const template = [
             {
                 label: '增加免番羽土啬hosts',
                 click() { init_hosts() }
+            },
+            {
+                label: '检查更新',
+                click() { manual_check_update() }
             },
             {
                 label: '切换开发者工具',
