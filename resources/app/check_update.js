@@ -1,12 +1,13 @@
 const process = require("process");
 const get_json = require("./get_json")
 const path = require('path');
-const { dialog, shell } = require('electron')
+const { dialog, shell, app } = require('electron')
 
 
 var _platform = process.platform == "win32" ? "windows" : "linux";
-var version = "1.0.1"/*当前版本号*/
-var versionCheckApi = "https://raw.githubusercontent.com/Xmader/mohu/master/version.json"/*检查更新Api地址*/
+var version = app.getVersion()/*当前版本号, 在package.json中定义*/
+// var versionCheckApi = "https://raw.githubusercontent.com/Xmader/mohu/master/version.json"/*检查更新Api地址*/
+var versionCheckApi = "https://raw.githubusercontent.com/Xmader/mohu/master/resources/app/package.json"
 var DownloadUrl = `https://xmader.oss-cn-shanghai.aliyuncs.com/mohu-${_platform}.zip`
 var version_formatted = format_version(version)
 

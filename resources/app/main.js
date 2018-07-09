@@ -240,7 +240,7 @@ function createWindow() {
         mainWindow.webContents.on('did-finish-load', () => {
             refresh_menu()
             var url = mainWindow.webContents.getURL()
-            if (url.indexOf("http")>=0){
+            if (url.indexOf("http") >= 0) {
                 show_contextMenu()
             }
 
@@ -251,6 +251,9 @@ function createWindow() {
             mainWindow.webContents.loadURL(url)
         })
 
+        mainWindow.webContents.on('did-start-loading', (event) => {
+            mainWindow.webContents.executeJavaScript(`if (typeof module === 'object') {window.jQuery = window.$ = module.exports;};`)
+        })
 
 
         mainWindow.on("close", function (event) {
