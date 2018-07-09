@@ -53,8 +53,8 @@ var manual_check_update = () => {
                 buttons: ["确定"],
                 defaultId: 0,
                 cancelId: 1,
-                title: `Mohu APP 已是最新`,
-                message: `当前版本 (v${version}) 是最新版本`,
+                title: `没有更新的版本`,
+                message: `当前版本 v${version} 是最新版本!`,
                 // icon: path.join(__dirname, './logo.png'),
             })
         }
