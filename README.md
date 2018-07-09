@@ -45,9 +45,7 @@ electron-packager . MohuAPP   --out ../../OutApp/ --electron-version 2.0.4 --ove
 
 ## Notes
 
-* 本项目的开发周期总计只有一天，时间有一些仓促，希望大家多多包涵
-
-* 如果有bug，请在[这里](https://github.com/Xmader/mohu/issues)向我反馈
+* If you find some bugs in this project, please create a report [here](https://github.com/Xmader/mohu/issues) to help us improve 
 
 ## With Special Thanks to
 
@@ -62,6 +60,6 @@ electron-packager . MohuAPP   --out ../../OutApp/ --electron-version 2.0.4 --ove
 
 ## LICENSE
 
-This project is a free and open source software, it is released under the MIT license.
+This software is a free and open source software, it is released under the MIT license.
 
 > I think I speak very poor English, but anyway I dare to say. This is very important.
