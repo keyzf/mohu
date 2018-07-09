@@ -32,7 +32,7 @@ const add_host = () => {
             console.log(err)
             let msg = err.message
             if (platform === 'win32') {
-                const msg2 = `,\n或 进入${path.dirname(sys_hosts_path)}文件夹, 右键hosts属性-安全-高级-权限-添加-选择主体-高级-立即查找-找到你现在的账户-勾选完全控制-一路确定即可添加对hosts文件的修改权限`
+                const msg2 = `请尝试 进入${path.dirname(sys_hosts_path)}文件夹, 右键hosts属性-安全-高级-权限-添加-选择主体-高级-立即查找-找到你现在的账户-勾选完全控制-一路确定即可添加对hosts文件的修改权限`
                 msg = `${msg}\n\n请以管理员身份运行本程序`
                 dialog.showMessageBox({
                     type: "error",
@@ -43,7 +43,28 @@ const add_host = () => {
                     message: msg,
                 }, (response, checkboxChecked) => {
                     if (response == 0) {
-                        var subpy = require('child_process').spawn(path.join(__dirname, 'auto_uac_add_hosts.exe'));
+                        var subpy = require('child_process').spawn(path.join(__dirname, 'auto_uac_add_hosts.exe'), [], { windowsHide: true });
+
+                        subpy.on('close', (code) => {
+                            if (code == 0) {
+                                dialog.showMessageBox({
+                                    type: "info",
+                                    buttons: ["确定"],
+                                    defaultId: 0,
+                                    title: "添加hosts成功!",
+                                    message: `您现在可以正常地免 番羽土啬 访问膜乎!`,
+                                })
+                            }
+                            else {
+                                dialog.showMessageBox({
+                                    type: "error",
+                                    buttons: ["确定"],
+                                    defaultId: 0,
+                                    title: "尝试自动获取权限添加hosts失败",
+                                    message: msg2,
+                                })
+                            }
+                        });
                     }
                 })
             }
