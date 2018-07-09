@@ -16,6 +16,12 @@ const host_is_existed = (data) => {
     return i >= 0;
 }
 
+const main_host_is_existed = () =>{
+    data = fs.readFileSync(sys_hosts_path, "utf-8")
+    var i = data.indexOf(host);
+    return i >= 0;
+}
+
 const get_sudo_pswd = () => {
 
 }
@@ -34,7 +40,7 @@ const add_host = () => {
                 message: `'${host}' 已被添加到您的hosts文件中 `,
             }, (response, checkboxChecked) => {
                 if (response == 0) {
-                    BrowserWindow.getFocusedWindow().webContents.loadURL("https://www.mohu.club/")
+                    BrowserWindow.getFocusedWindow().webContents.reload();
                 }
             })
         }
@@ -84,4 +90,5 @@ const init_hosts = () => {
 
 module.exports = {
     init_hosts: init_hosts,
+    main_host_is_existed: main_host_is_existed,
 }

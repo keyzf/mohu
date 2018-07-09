@@ -1,7 +1,7 @@
 const electron = require('electron');
 const fs = require("fs");
 const path = require('path');
-const { init_hosts } = require("./hosts")
+const { init_hosts,main_host_is_existed } = require("./hosts")
 const { check_update, manual_check_update } = require("./check_update")
 const copy_current_url = require("./copy_current_url")
 
@@ -192,9 +192,6 @@ const contextMenuTemplate = [
     { label: "全选", role: 'selectall' } //Select All菜单项 
 ];
 const contextMenu = Menu.buildFromTemplate(contextMenuTemplate);
-const show_contextMenu = () => {
-    mainWindow.webContents.executeJavaScript(`const {ipcRenderer} = require('electron');window.addEventListener('contextmenu', (e)=>{e.preventDefault();ipcRenderer.send('right_btn');});`)
-}
 
 
 function createWindow() {
@@ -210,6 +207,9 @@ function createWindow() {
 
 
     landingWindow.once("show", () => {
+        if(!main_host_is_existed()){
+            init_hosts()
+        }
 
         // Create the browser window.
         mainWindow = new BrowserWindow({
@@ -217,7 +217,12 @@ function createWindow() {
             height: 740,
             icon: path.join(__dirname, 'logo.png'),
             show: false,
-
+            webPreferences: {
+                nodeIntegration: false, // 不集成 Nodejs
+                // webSecurity: false,//禁用同源策略
+                // allowRunningInsecureContent:true//允许一个 https 页面运行 http url 里的资源
+                preload: path.join(__dirname, 'pre.js') // 但预加载的 js 文件内仍可以使用 Nodejs 的 API
+            }
         })
 
         mainWindow.once("show", () => {
@@ -239,10 +244,6 @@ function createWindow() {
 
         mainWindow.webContents.on('did-finish-load', () => {
             refresh_menu()
-            var url = mainWindow.webContents.getURL()
-            if (url.indexOf("http") >= 0) {
-                show_contextMenu()
-            }
 
         });
 
@@ -250,11 +251,6 @@ function createWindow() {
             event.preventDefault()
             mainWindow.webContents.loadURL(url)
         })
-
-        mainWindow.webContents.on('did-start-loading', (event) => {
-            mainWindow.webContents.executeJavaScript(`if (typeof module === 'object') {window.jQuery = window.$ = module.exports;};`)
-        })
-
 
         mainWindow.on("close", function (event) {
             if (process.platform === "darwin" && !forceQuit) {
