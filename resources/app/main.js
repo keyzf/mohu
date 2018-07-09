@@ -2,6 +2,7 @@ const electron = require('electron');
 const fs = require("fs");
 const path = require('path');
 const { init_hosts } = require("./hosts")
+const check_update = require("./check_update")
 
 var { app, BrowserWindow, ipcMain, Menu } = electron;
 let mainWindow = null, landingWindow = null, locale;
@@ -100,7 +101,6 @@ function createWindow() {
 
 
     landingWindow.once("show", () => {
-        // init_hosts()
 
         // Create the browser window.
         mainWindow = new BrowserWindow({
@@ -119,6 +119,7 @@ function createWindow() {
             landingWindow.removeAllListeners();
             mainWindow.show()
             landingWindow = null
+            check_update()
         })
 
         mainWindow.webContents.on("will-navigate", (ev) => {
