@@ -168,10 +168,10 @@ const template = [
                 label: '关于',
                 click() { shell.openExternal("https://github.com/Xmader/mohu") }
             },
-            {
-                label: 'Linux获取sudo密码',
-                click() { get_sudo_pswd() }
-            },
+            // {
+            //     label: 'Linux获取sudo密码',
+            //     click() { get_sudo_pswd() }
+            // },
             
         ]
     },
