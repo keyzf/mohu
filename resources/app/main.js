@@ -3,6 +3,7 @@ const fs = require("fs");
 const path = require('path');
 const { init_hosts } = require("./hosts")
 const { check_update, manual_check_update } = require("./check_update")
+const copy_current_url = require("./copy_current_url")
 
 var { app, BrowserWindow, ipcMain, Menu, shell } = electron;
 let mainWindow = null, landingWindow = null, locale;
@@ -45,20 +46,20 @@ const template = [
                 label: "转到上一页",
                 id: "goBack",
                 accelerator: "Ctrl+Left",
-                enabled:false,
+                enabled: false,
                 click: () => {
                     mainWindow.webContents.goBack();
-                    go_forward_go_back_menu()
+
                 }
             },
             {
                 label: "转到下一页",
                 id: "goForward",
                 accelerator: "Ctrl+Right",
-                enabled:false,
+                enabled: false,
                 click: () => {
                     mainWindow.webContents.goForward()
-                    go_forward_go_back_menu()
+
                 }
             },
             {
@@ -70,6 +71,14 @@ const template = [
                     mainWindow.webContents.reload();
                 }
             },
+            // {
+            //     label: "搜索",
+
+            //     //accelerator: "F5",
+            //     click: () => {
+            //         mainWindow.webContents.findInPage("1");
+            //     }
+            // },
         ]
     },
     {
@@ -122,6 +131,7 @@ const template = [
                     mainWindow.setFullScreen(!mainWindow.isFullScreen());
                 }
             },
+            // { type: 'separator' },//分割线
             {
                 label: '切换开发者工具',
                 accelerator: "F12",
@@ -129,24 +139,19 @@ const template = [
             },
         ]
     },
-    // {
-    //     label: '分享',
+    {
+        label: '分享',
 
-    //     submenu: [
-    //         {
-    //             label: "全屏",
-    //             accelerator: "F11",
-    //             click: () => {
-    //                 mainWindow.setFullScreen(!mainWindow.isFullScreen());
-    //             }
-    //         },
-    //         {
-    //             label: '切换开发者工具',
-    //             accelerator: "F12",
-    //             click() { mainWindow.webContents.toggleDevTools(); }
-    //         },
-    //     ]
-    // },
+        submenu: [
+            {
+                label: "复制当前网址",
+                click: () => {
+                    copy_current_url()
+                }
+            },
+
+        ]
+    },
     {
         label: '高级',
         submenu: [
@@ -154,6 +159,7 @@ const template = [
                 label: '增加免番羽土啬hosts',
                 click() { init_hosts() }
             },
+            // { type: 'separator' },//分割线
             {
                 label: '检查更新',
                 click() { manual_check_update() }
@@ -167,11 +173,29 @@ const template = [
 
 ]
 const menu = Menu.buildFromTemplate(template)
-const go_forward_go_back_menu = () => {
+const refresh_menu = () => {
     menu.getMenuItemById("goBack").enabled = mainWindow.webContents.canGoBack()
     menu.getMenuItemById("goForward").enabled = mainWindow.webContents.canGoForward()
 
 }
+
+//给文本框增加右键菜单
+const contextMenuTemplate = [
+    // {  label: "转到上一页",role: 'undo' }, //Undo菜单项
+    // { role: 'redo' }, //Redo菜单项 
+    // { type: 'separator' }, //分隔线 
+    { label: "剪切", role: 'cut' }, //Cut菜单项 
+    { label: "复制", role: 'copy' }, //Copy菜单项 
+    { label: "粘贴", role: 'paste' }, //Paste菜单项 
+    { label: "删除", role: 'delete' }, //Delete菜单项 
+    { type: 'separator' }, //分隔线 
+    { label: "全选", role: 'selectall' } //Select All菜单项 
+];
+const contextMenu = Menu.buildFromTemplate(contextMenuTemplate);
+const show_contextMenu = () => {
+    mainWindow.webContents.executeJavaScript(`const {ipcRenderer} = require('electron');window.addEventListener('contextmenu', (e)=>{e.preventDefault();ipcRenderer.send('right_btn');});`)
+}
+
 
 function createWindow() {
     locale = app.getLocale();
@@ -193,9 +217,7 @@ function createWindow() {
             height: 740,
             icon: path.join(__dirname, 'logo.png'),
             show: false,
-            webPreferences: {
-                nodeIntegration: false
-            }
+
         })
 
         mainWindow.once("show", () => {
@@ -207,7 +229,7 @@ function createWindow() {
             check_update()
         })
 
-        mainWindow.webContents.on('did-finish-load', () => {
+        mainWindow.webContents.once('did-finish-load', () => {
             if (!mainWindow) {
                 throw new Error('"mainWindow" is not defined');
             }
@@ -215,15 +237,20 @@ function createWindow() {
             mainWindow.focus();
         });
 
+        mainWindow.webContents.on('did-finish-load', () => {
+            refresh_menu()
+            var url = mainWindow.webContents.getURL()
+            if (url.indexOf("http")>=0){
+                show_contextMenu()
+            }
+
+        });
+
         mainWindow.webContents.on('new-window', (event, url) => {
             event.preventDefault()
             mainWindow.webContents.loadURL(url)
-            go_forward_go_back_menu()
         })
 
-        mainWindow.webContents.on('did-navigate', (event, url) => {
-            go_forward_go_back_menu()
-        })
 
 
         mainWindow.on("close", function (event) {
@@ -253,4 +280,8 @@ function createWindow() {
 
 ipcMain.on("reload", () => {
     mainWindow.webContents.reloadIgnoringCache()
+})
+
+ipcMain.on("right_btn", () => {
+    contextMenu.popup(mainWindow);
 })
