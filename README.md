@@ -1,48 +1,67 @@
 # Mohu App
 
-一个simple的膜乎免 番羽土啬 Windows & Linux APP
+[English](https://github.com/Xmader/mohu/blob/master/README.md) | [中文](https://github.com/Xmader/mohu/blob/master/README_zh.md)
+
+A simple Windows & Linux APP of Mohu, no climbing over the GFW needed
 
 [![+1s](https://img.shields.io/badge/%CE%98..%CE%98-%2B1s-green.svg)](https://en.wikipedia.org/wiki/Moha_culture)
 
-## 功能
+## Features
 
-* 自动添加hosts, 免 番羽土啬 浏览膜乎
+* Auto add hosts, Browse Mohu without climbing over the GFW
 
-* 内置三个镆铪/乳苞小游戏:
+* Include three moha/rubao small games:
 
     * Flappy Winnie
     * Flappy Frog
-    * 切包子
+    * Baozi Ninja
 
-* 自动检查更新
+* Auto update
 
-## 下载
+## Download
 
-[Windows 32位版](https://xmader.oss-cn-shanghai.aliyuncs.com/MohuAPP-win32-ia32.zip)
+You can download the source code and build it yourself, or download the built version from following links:
 
-[Windows 64位版](https://xmader.oss-cn-shanghai.aliyuncs.com/MohuAPP-win32-x64.zip)
+[for Windows 32bit](https://xmader.oss-cn-shanghai.aliyuncs.com/MohuAPP-win32-ia32.zip)
 
-[Linux 64位版](https://xmader.oss-cn-shanghai.aliyuncs.com/MohuAPP-linux-x64.zip)
+[for Windows 64bit](https://xmader.oss-cn-shanghai.aliyuncs.com/MohuAPP-win32-x64.zip)
 
-## 备注
+[for Linux 64bit](https://xmader.oss-cn-shanghai.aliyuncs.com/MohuAPP-linux-x64.zip)
+
+## Build
+
+> If you downloaded the built version, you can simply skip this step.
+
+```bash
+cd ./resources/app
+
+electron-packager . MohuAPP   --out ../../OutApp/ --electron-version 2.0.4 --overwrite --icon=./logo.ico --tmpdir=../../OutApp/Temp/ --ignore=packager.sh
+```
+
+## Run
+
+1. Unzip all the files
+2. find `MohuAPP.exe`(Windows) or `MohuAPP`(Linux), just run it
+
+## Notes
 
 * 本项目的开发周期总计只有一天，时间有一些仓促，希望大家多多包涵
 
 * 如果有bug，请在[这里](https://github.com/Xmader/mohu/issues)向我反馈
 
-## 特别感谢
+## With Special Thanks to
 
-> 本项目在开发过程中参考了以下项目或用户的部分源代码
+> This project references some of their codes when developing
 
-* [Hydrogen](https://github.com/Xmader/hydrogen/tree/linux) (参考了其landing页面)
+* [Hydrogen](https://github.com/Xmader/hydrogen/tree/linux) (Referenced its landing page)
 
-* [@hahaxixi](https://github.com/hahaxixi) (本项目内置了他的三个小游戏)
+* [@hahaxixi](https://github.com/hahaxixi) (This project includes his three small games)
 
-* [SwitchHosts!](https://github.com/oldj/SwitchHosts) (参考了其关于修改hosts文件的部分代码)
+* [SwitchHosts!](https://github.com/oldj/SwitchHosts) (Referenced its codes about editing hosts file)
 
 
-## 开源许可证
+## LICENSE
 
-MIT
+This project is a free and open source software, it is released under the MIT license.
 
-> 很惭愧，就做了一点微小的工作，谢谢大家
+> I think I speak very poor English, but anyway I dare to say. This is very important.
