@@ -2,6 +2,8 @@
 
 一个simple的膜乎免 番羽土啬 Windows & Linux APP
 
+[![+1s](https://img.shields.io/badge/%CE%98..%CE%98-%2B1s-green.svg)](https://en.wikipedia.org/wiki/Moha_culture)
+
 ## 功能
 
 * 自动添加hosts, 免 番羽土啬 浏览膜乎
@@ -13,6 +15,14 @@
     * 切包子
 
 * 自动检查更新
+
+## 下载
+
+[Windows 32位版](https://xmader.oss-cn-shanghai.aliyuncs.com/MohuAPP-win32-ia32.zip)
+
+[Windows 64位版](https://xmader.oss-cn-shanghai.aliyuncs.com/MohuAPP-win32-x64.zip)
+
+[Linux 64位版](https://xmader.oss-cn-shanghai.aliyuncs.com/MohuAPP-linux-x64.zip)
 
 ## 备注
 
@@ -34,3 +44,5 @@
 ## 开源许可证
 
 MIT
+
+> 很惭愧，就做了一点微小的工作，谢谢大家

@@ -15,7 +15,8 @@
         "start": "electron .",
         "packager-win64": "git-bash ./packager.sh win32 x64",
         "packager-win32": "git-bash ./packager.sh win32 ia32",
-        "packager-linux64": "git-bash ./packager.sh linux x64"
+        "packager-linux64": "git-bash ./packager.sh linux x64",
+        "packager-all": "npm run-script packager-win64 && npm run-script packager-win32 && npm run-script packager-linux64"
     },
     "license": "MIT"
 }
