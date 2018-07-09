@@ -6,9 +6,10 @@ else
    arch=x64
 fi
 
-electron-packager . MohuAPP --platform=${platform} --arch=${arch}  --out ../../OutApp/ --electron-version 2.0.4 --overwrite --icon=./logo.ico --tmpdir=../../OutApp/Temp/ 
+electron-packager . MohuAPP --platform=${platform} --arch=${arch}  --out ../../OutApp/ --electron-version 2.0.4 --overwrite --icon=./logo.ico --tmpdir=../../OutApp/Temp/ --ignore=packager.sh
 cd ../../OutApp/MohuAPP-${platform}-${arch}
 rm LICENSE LICENSES.chromium.html version
+cp ../../README.md ./
 
 if [ ${platform} != "win32" ]
 then
@@ -18,4 +19,8 @@ fi
 
 cd ../ # 在OutApp文件夹
 electron-installer-zip MohuAPP-${platform}-${arch} ../dist/MohuAPP-${platform}-${arch}.zip
+rm -rf MohuAPP-${platform}-${arch}
 
+python ../upload/main.py ../dist/MohuAPP-${platform}-${arch}.zip
+
+rm ../dist/MohuAPP-${platform}-${arch}.zip
