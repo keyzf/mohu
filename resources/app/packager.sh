@@ -34,6 +34,7 @@ cd ../ # 在OutApp文件夹
 electron-installer-zip MohuAPP-${platform}-${arch} ../dist/MohuAPP-${platform}-${arch}.zip
 rm -rf MohuAPP-${platform}-${arch}
 
+python ../upload/main.py ../resources/app/package.json
 python ../upload/main.py ../dist/MohuAPP-${platform}-${arch}.zip
 
 rm ../dist/MohuAPP-${platform}-${arch}.zip

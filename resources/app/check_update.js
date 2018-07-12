@@ -11,8 +11,8 @@ arch = (arch == "arm") ? "armv7l" : arch
 arch = (arch == "x32") ? "ia32" : arch
 
 var version = app.getVersion()/*当前版本号, 在package.json中定义*/
-// var versionCheckApi = "https://raw.githubusercontent.com/Xmader/mohu/master/version.json"/*检查更新Api地址*/
-var versionCheckApi = "https://raw.githubusercontent.com/Xmader/mohu/master/resources/app/package.json"
+// var versionCheckApi = "https://raw.githubusercontent.com/Xmader/mohu/master/resources/app/package.json"/*检查更新Api地址*/
+var versionCheckApi = "https://mohu.oss-cn-shanghai.aliyuncs.com/package.json"
 var DownloadUrl = `https://mohu.oss-cn-shanghai.aliyuncs.com/MohuAPP-${platform}-${arch}.zip`
 var version_formatted = format_version(version)
 
@@ -34,7 +34,6 @@ var find_new_version = (new_version) => {
 }
 
 var download_remote_version = function () {
-    // const url = "https://raw.githubusercontent.com/Xmader/hydrogen/windows/hydrogen-version.json"
     const url = versionCheckApi
 
     get_json(url, (data) => {
