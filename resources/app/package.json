@@ -35,11 +35,11 @@
     },
     "scripts": {
         "start": "electron .",
-        "packager":"if [ $(uname -o) = \"Msys\" ];then git-bash ./packager.sh $p $a;else ./packager.sh $p $a;fi",
+        "packager":"if [ $(uname -o) = \"Msys\" ];then a=git-bash ./packager.sh;else a=./packager.sh;fi;$a",
         "packager-win64": "./packager.sh win32 x64",
         "packager-win32": "./packager.sh win32 ia32",
         "packager-linux64": "./packager.sh linux x64",
-        "packager-linux32": "export p=linux;export a=ia32;npm run packager",
+        "packager-linux32": "npm run packager -- linux ia32",
         "packager-darwin64": "./packager.sh darwin x64",
         "packager-all": "npm run packager-win64 && npm run packager-win32 && npm run packager-linux64 && npm run packager-darwin64"
     },
