@@ -9,7 +9,7 @@ from settings import auth, endpoint, bucket, site
 file_name = os.path.abspath(sys.argv[1])
 base_name = os.path.basename(file_name)
 
-print u"即将上传 " + file_name + u" 到 /" + base_name
+print u"即将上传 " + file_name + u" 到 "+site+"/" + base_name
 
 
 oss2.resumable_upload(bucket, base_name, file_name,
