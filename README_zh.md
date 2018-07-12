@@ -37,13 +37,13 @@
 ```bash
 cd ./resources/app
 
-electron-packager . MohuAPP   --out ../../OutApp/ --electron-version 2.0.4 --overwrite --icon=./logo.ico --tmpdir=../../OutApp/Temp/ --ignore=packager.sh
+electron-packager . MohuAPP   --out ../../OutApp/ --electron-version 2.0.4 --overwrite --icon=./logo.ico --tmpdir=../../OutApp/Temp/ --ignore=packager.sh --download.cache=../../OutApp/Temp/ --download.mirror="https://npm.taobao.org/mirrors/electron/"
 ```
 
 ## 运行
 
 1. 解压全部文件
-2. 找到 `MohuAPP.exe`(Windows) 或 `MohuAPP`(Linux)，双击运行
+2. 找到 `MohuAPP.exe`(Windows) 或 `MohuAPP`(Linux) 或 `MohuAPP.app`(MacOS)，双击运行
 
 ## 备注
 

@@ -37,13 +37,13 @@ You can download the source code and build it yourself, or download the built ve
 ```bash
 cd ./resources/app
 
-electron-packager . MohuAPP   --out ../../OutApp/ --electron-version 2.0.4 --overwrite --icon=./logo.ico --tmpdir=../../OutApp/Temp/ --ignore=packager.sh
+electron-packager . MohuAPP   --out ../../OutApp/ --electron-version 2.0.4 --overwrite --icon=./logo.ico --tmpdir=../../OutApp/Temp/ --ignore=packager.sh --download.cache=../../OutApp/Temp/ --download.mirror="https://npm.taobao.org/mirrors/electron/"
 ```
 
 ## Run
 
 1. Unzip all the files
-2. find `MohuAPP.exe`(Windows) or `MohuAPP`(Linux), just run it
+2. find `MohuAPP.exe`(Windows) or `MohuAPP`(Linux) or `MohuAPP.app`(MacOS), just run it
 
 ## Notes
 
