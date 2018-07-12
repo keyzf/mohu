@@ -8,8 +8,30 @@
         "type": "git",
         "url": "https://github.com/Xmader/mohu"
     },
-    "author": {
-        "name": "xmader"
+    "author": "xmader",
+    "build": {
+        "appId": "com.mohu.app",
+        "productName": "MohuAPP",
+        "directories": {
+            "output": "../../OutApp"
+        },
+        "electronDownload": {
+            "cache": "../../OutApp/Temp",
+            "mirror": "https://npm.taobao.org/mirrors/electron/"
+        },
+        "electronVersion": "2.0.4",
+        "mac": {
+            "target": [
+                "zip"
+            ]
+        },
+        "win": {
+            "target": "zip",
+            "extraFiles": [
+                "../../README.md",
+                "../../README_zh.md"
+            ]
+        }
     },
     "scripts": {
         "start": "electron .",
