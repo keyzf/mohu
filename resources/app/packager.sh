@@ -15,15 +15,19 @@ then
     # powershell Start-Process electron-packager -ArgumentList \". MohuAPP --platform=darwin --arch=x64  --out ../../OutApp/ --electron-version 2.0.4 --overwrite --icon=./logo.ico --tmpdir=../../OutApp/Temp/ --ignore=packager.sh\" -WorkingDirectory \"F:\\mohu\\resources\\app\" -Verb runas -Wait
 fi
 
-electron-packager . MohuAPP --platform=${platform} --arch=${arch}  --out ../../OutApp/ --electron-version 2.0.4 --overwrite --icon=./logo.ico --tmpdir=../../OutApp/Temp/ --ignore=packager.sh
+electron-packager . MohuAPP --platform=${platform} --arch=${arch}  --out ../../OutApp/ --electron-version 2.0.4 --overwrite --icon=./logo.ico --tmpdir=../../OutApp/Temp/ --ignore=packager.sh --download.cache=../../OutApp/Temp/ --download.mirror="https://npm.taobao.org/mirrors/electron/"
 cd ../../OutApp/MohuAPP-${platform}-${arch}
 rm LICENSE LICENSES.chromium.html version
 cp ../../README.md ./
 
 if [ ${platform} != "win32" -a ${platform} != "darwin" ]
 then
-#    echo ${platform}
     rm resources/app/auto_uac_add_hosts.exe
+fi
+
+if [ ${platform} = "darwin" ]
+then
+    rm MohuAPP.app/Contents/Resources/app/auto_uac_add_hosts.exe
 fi
 
 cd ../ # 在OutApp文件夹
