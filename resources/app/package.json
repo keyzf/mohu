@@ -16,7 +16,9 @@
         "packager-win64": "git-bash ./packager.sh win32 x64",
         "packager-win32": "git-bash ./packager.sh win32 ia32",
         "packager-linux64": "git-bash ./packager.sh linux x64",
-        "packager-all": "npm run-script packager-win64 && npm run-script packager-win32 && npm run-script packager-linux64"
+        "packager-linux32": "git-bash ./packager.sh linux ia32",
+        "packager-darwin64": "git-bash ./packager.sh darwin x64",
+        "packager-all": "npm run-script packager-win64 && npm run-script packager-win32 && npm run-script packager-linux64 && npm run-script packager-darwin64"
     },
     "license": "MIT"
 }
