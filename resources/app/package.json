@@ -35,12 +35,17 @@
     },
     "scripts": {
         "start": "electron .",
-        "packager-win64": "git-bash ./packager.sh win32 x64",
-        "packager-win32": "git-bash ./packager.sh win32 ia32",
-        "packager-linux64": "git-bash ./packager.sh linux x64",
-        "packager-linux32": "git-bash ./packager.sh linux ia32",
-        "packager-darwin64": "git-bash ./packager.sh darwin x64",
-        "packager-all": "npm run-script packager-win64 && npm run-script packager-win32 && npm run-script packager-linux64 && npm run-script packager-darwin64"
+        "packager-win64": "./packager.sh win32 x64",
+        "packager-win32": "./packager.sh win32 ia32",
+        "packager-linux64": "./packager.sh linux x64",
+        "packager-darwin64": "./packager.sh darwin x64",
+        "packager-all": "npm run packager-win64 && npm run packager-win32 && npm run packager-linux64 && npm run packager-darwin64",
+
+        "win-packager-win64": "git-bash ./packager.sh win32 x64",
+        "win-packager-win32": "git-bash ./packager.sh win32 ia32",
+        "win-packager-linux64": "git-bash ./packager.sh linux x64",
+        "win-packager-darwin64": "git-bash ./packager.sh darwin x64",
+        "win-packager-all": "npm run win-packager-win64 && npm run win-packager-win32 && npm run win-packager-linux64 && npm run win-packager-darwin64"
     },
     "license": "MIT"
 }
