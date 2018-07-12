@@ -4,7 +4,7 @@
 
 一个simple的膜乎免 番羽土啬 Windows & Linux APP
 
-[![+1s](https://img.shields.io/badge/%CE%98..%CE%98-%2B1s-green.svg)](https://zh.wikipedia.org/wiki/%E8%86%9C%E8%9B%A4%E6%96%87%E5%8C%96)
+[![+1s](%CE%98..%CE%98-%2B1s-green.svg)](https://zh.wikipedia.org/wiki/%E8%86%9C%E8%9B%A4%E6%96%87%E5%8C%96)
 
 ## 功能
 

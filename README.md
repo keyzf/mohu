@@ -4,7 +4,7 @@
 
 A simple Windows & Linux APP of Mohu, no climbing over the GFW needed
 
-[![+1s](https://img.shields.io/badge/%CE%98..%CE%98-%2B1s-green.svg)](https://en.wikipedia.org/wiki/Moha_culture)
+[![+1s](%CE%98..%CE%98-%2B1s-green.svg)](https://en.wikipedia.org/wiki/Moha_culture)
 
 ## Features
 
