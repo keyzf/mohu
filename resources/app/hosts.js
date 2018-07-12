@@ -36,6 +36,47 @@ function needPswd(str) {
     return !!keys.find(k => str.includes(k.toLowerCase()))
 }
 
+const unix_exec_callback = function (error, stdout, stderr) {
+    // command output is in stdout
+    if (!error) {
+        if (platform === 'darwin') {
+            if (fs.existsSync(cmd_fn)) {
+                try {
+                    fs.unlink(cmd_fn)
+                } catch (e) {
+                    console.error(e.message)
+                }
+            }
+        }
+        dialog.showMessageBox({
+            type: "info",
+            buttons: ["确定"],
+            defaultId: 0,
+            title: "添加hosts成功!",
+            message: `'${host}' 已被添加到您的hosts文件中`,
+        }, (response, checkboxChecked) => {
+            if (response == 0) {
+                BrowserWindow.fromId(2).webContents.reload();
+            }
+        })
+    }
+    else {
+        msg = needPswd(stdout + stderr) ? 'sudo密码错误' : error
+        dialog.showMessageBox({
+            type: "error",
+            buttons: ["重试", "取消"],
+            defaultId: 0,
+            cancelId: 1,
+            title: "修改hosts文件失败",
+            message: msg,
+        }, (response, checkboxChecked) => {
+            if (response == 0) {
+                get_sudo_pswd()
+            }
+        })
+    }
+}
+
 const get_sudo_pswd = () => {
     var sudo_pswd_win = new BrowserWindow({
         frame: false,
@@ -50,44 +91,37 @@ const get_sudo_pswd = () => {
     ipcMain.once("sudo_passwd", (event, arg) => {
         // console.log(arg)
         const sudo_pswd = arg
-        const cmd = [
-            `echo '${sudo_pswd}' | sudo -S chmod 777 ${sys_hosts_path}`
-            , `echo "${host}" >> ${sys_hosts_path}`
-            , `echo '${sudo_pswd}' | sudo -S chmod 644 ${sys_hosts_path}`
-        ].join(' && ')
+        if (platform != 'darwin') {
 
-        exec(cmd, function (error, stdout, stderr) {
-            // command output is in stdout
-            if (!error) {
-                dialog.showMessageBox({
-                    type: "info",
-                    buttons: ["确定"],
-                    defaultId: 0,
-                    title: "添加hosts成功!",
-                    message: `'${host}' 已被添加到您的hosts文件中`,
-                }, (response, checkboxChecked) => {
-                    if (response == 0) {
-                        BrowserWindow.fromId(2).webContents.reload();
-                    }
-                })
-            }
-            else {
-                msg = needPswd(stdout + stderr) ? 'sudo密码错误' : error
-                dialog.showMessageBox({
-                    type: "error",
-                    buttons: ["重试", "取消"],
-                    defaultId: 0,
-                    cancelId: 1,
-                    title: "修改hosts文件失败",
-                    message: msg,
-                }, (response, checkboxChecked) => {
-                    if (response == 0) {
-                        get_sudo_pswd()
-                    }
-                })
-            }
-        })
+            const cmd = [
+                `echo '${sudo_pswd}' | sudo -S chmod 777 ${sys_hosts_path}`
+                , `echo "${host}" >> ${sys_hosts_path}`
+                , `echo '${sudo_pswd}' | sudo -S chmod 644 ${sys_hosts_path}`
+            ].join(' && ')
 
+            exec(cmd, unix_exec_callback)
+        }
+        else {
+            let cmd_fn = path.join(work_path, '_restart_net.sh')
+            let cmd = `
+p1=/System/Library/LaunchDaemons/com.apple.mDNSResponder.plist
+if [ -f $p1 ]; then
+    launchctl unload -w $p1
+    launchctl load -w $p1
+fi
+
+p2=/System/Library/LaunchDaemons/com.apple.discoveryd.plist
+if [ -f p2 ]; then
+    launchctl unload -w $p2
+    launchctl load -w $p2
+fi
+
+killall -HUP mDNSResponder
+`
+
+            fs.writeFileSync(cmd_fn, cmd, 'utf-8')
+            exec(`echo '${sudo_pswd}' | sudo -S /bin/sh ${cmd_fn}`, unix_exec_callback)
+        }
     })
 }
 

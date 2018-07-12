@@ -2,7 +2,7 @@
 
 [English](https://github.com/Xmader/mohu/blob/master/README.md) | [中文](https://github.com/Xmader/mohu/blob/master/README_zh.md)
 
-一个simple的膜乎免 番羽土啬 Windows & Linux APP
+一个simple的膜乎免 番羽土啬 APP
 
 [![+1s](%CE%98..%CE%98-%2B1s-green.svg)](https://zh.wikipedia.org/wiki/%E8%86%9C%E8%9B%A4%E6%96%87%E5%8C%96)
 

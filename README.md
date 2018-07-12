@@ -2,7 +2,7 @@
 
 [English](https://github.com/Xmader/mohu/blob/master/README.md) | [中文](https://github.com/Xmader/mohu/blob/master/README_zh.md)
 
-A simple Windows & Linux APP of Mohu, no climbing over the GFW needed
+A simple APP of Mohu, no climbing over the GFW needed
 
 [![+1s](%CE%98..%CE%98-%2B1s-green.svg)](https://en.wikipedia.org/wiki/Moha_culture)
 

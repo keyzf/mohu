@@ -4,7 +4,7 @@ const path = require('path');
 const { dialog, shell, app } = require('electron')
 
 
-var _platform = process.platform == "win32" ? "windows" : "linux";
+var _platform = process.platform == "win32" ? "windows" : process.platform;
 var platform = process.platform;
 var arch = process.arch
 arch = (arch == "arm") ? "armv7l" : arch

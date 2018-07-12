@@ -2,7 +2,7 @@
     "name": "mohu",
     "productName": "Mohu APP",
     "version": "1.0.1",
-    "description": "膜乎APP for Windows & Linux",
+    "description": "膜乎APP",
     "main": "./main.js",
     "repository": {
         "type": "git",
