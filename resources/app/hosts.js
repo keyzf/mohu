@@ -53,7 +53,8 @@ const unix_exec_callback = function (error, stdout, stderr) {
             buttons: ["确定"],
             defaultId: 0,
             title: "添加hosts成功!",
-            message: `'${host}' 已被添加到您的hosts文件中`,
+            message: `所需hosts已被添加到您的hosts文件中`,
+            // message: `'${host}' 已被添加到您的hosts文件中`,
         }, (response, checkboxChecked) => {
             if (response == 0) {
                 BrowserWindow.fromId(2).webContents.reload();
@@ -190,7 +191,8 @@ const add_host = () => {
                 buttons: ["确定"],
                 defaultId: 0,
                 title: "添加hosts成功!",
-                message: `'${host}' 已被添加到您的hosts文件中 `,
+                message: `所需hosts已被添加到您的hosts文件中`,
+                // message: `'${host}' 已被添加到您的hosts文件中 `,
             }, (response, checkboxChecked) => {
                 if (response == 0) {
                     BrowserWindow.fromId(2).webContents.reload();
@@ -214,7 +216,8 @@ const ok = () => {
                     buttons: ["确定"],
                     defaultId: 0,
                     title: `hosts已存在`,
-                    message: `'${host}' 已存在于您的hosts文件中 `,
+                    message: `所需hosts已存在于您的hosts文件中`,
+                    // message: `'${host}' 已存在于您的hosts文件中 `,
                 })
             }
         }
@@ -230,7 +233,7 @@ const init_hosts = () => {
         cancelId: 1,
         title: `增加hosts`,
         message: "是否要增加hosts以实现免 番羽土啬 访问膜乎?",
-        detail: `'${host}' 将会被添加到您的hosts文件中 `,
+        // detail: `'${host}' 将会被添加到您的hosts文件中 `,
     }, (response, checkboxChecked) => {
         if (response == 0) {
             ok()
