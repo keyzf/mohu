@@ -28,6 +28,8 @@ You can download the source code and build it yourself, or download the built ve
 
 [for Linux 64bit](https://mohu.oss-cn-shanghai.aliyuncs.com/MohuAPP-linux-x64.zip)
 
+[for MacOS 64bit](https://mohu.oss-cn-shanghai.aliyuncs.com/MohuAPP-darwin-x64.zip)
+
 ## Build
 
 > If you downloaded the built version, you can simply skip this step.

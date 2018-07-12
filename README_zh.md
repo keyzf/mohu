@@ -28,6 +28,8 @@
 
 [Linux 64位版](https://mohu.oss-cn-shanghai.aliyuncs.com/MohuAPP-linux-x64.zip)
 
+[MacOS 64位版](https://mohu.oss-cn-shanghai.aliyuncs.com/MohuAPP-darwin-x64.zip)
+
 ## 构建
 
 > 如果您下载的是构建好的版本, 您可以直接跳过泽一步
