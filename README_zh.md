@@ -49,15 +49,21 @@ electron-packager . MohuAPP   --out ../../OutApp/ --electron-version 2.0.4 --ove
 
 ## 备注
 
-* 本项目的开发周期总计只有一天，时间有一些仓促，希望大家多多包涵
-
 * 如果有bug，请在[这里](https://github.com/Xmader/mohu/issues)向我反馈
+
+## 更新历史
+
+[点我查看](update_history.md)
 
 ## 特别感谢
 
 > 本项目在开发过程中参考了以下项目或用户的部分源代码
 
 * [Hydrogen](https://github.com/Xmader/hydrogen/tree/linux) (参考了其landing页面)
+
+<!-- * [膜法指南](https://github.com/naco-siren/mogicians_manual_public_release) (本项目内置了膜法指南) -->
+
+* [angry.im](https://angry.im/) (本项目使用了angry.im的续命API)
 
 * [@hahaxixi](https://github.com/hahaxixi) (本项目内置了他的三个小游戏)
 

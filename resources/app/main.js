@@ -1,7 +1,7 @@
 const electron = require('electron');
 const fs = require("fs");
 const path = require('path');
-const { init_hosts,main_host_is_existed,get_sudo_pswd } = require("./hosts")
+const { init_hosts, main_host_is_existed, get_sudo_pswd } = require("./hosts")
 const { check_update, manual_check_update } = require("./check_update")
 const copy_current_url = require("./copy_current_url")
 
@@ -122,6 +122,26 @@ const template = [
             }]
     },
     {
+        label: "续命时钟",
+
+        // accelerator: "Ctrl+M",
+        click: () => {
+            clock_win = new BrowserWindow({
+                // frame: false,
+                title: "续命时钟",
+                icon: path.join(__dirname, 'logo.png'),
+                width: 600,
+                height: 150,
+                resizable:false,
+                maximizable:false,
+                alwaysOnTop:true,
+                useContentSize:true
+            })
+            clock_win.setMenu(null)
+            clock_win.loadURL(`file://${__dirname}/clock.html`)
+        }
+    },
+    {
         label: '视图',
         submenu: [
             {
@@ -172,7 +192,7 @@ const template = [
             //     label: 'Linux获取sudo密码',
             //     click() { get_sudo_pswd() }
             // },
-            
+
         ]
     },
 
@@ -222,7 +242,7 @@ function createWindow() {
     landingWindow = new BrowserWindow({
         show: false,
         frame: isDev,
-        title:"膜乎APP",
+        title: "膜乎APP",
         icon: path.join(__dirname, 'logo.png'),
         width: 490,
         height: 400
@@ -231,7 +251,7 @@ function createWindow() {
 
 
     landingWindow.once("show", () => {
-        if(!main_host_is_existed()){
+        if (!main_host_is_existed()) {
             init_hosts()
         }
 
@@ -240,7 +260,7 @@ function createWindow() {
             width: 1100,
             height: 740,
             icon: path.join(__dirname, 'logo.png'),
-            title:"膜乎APP",
+            title: "膜乎APP",
             show: false,
             webPreferences: {
                 nodeIntegration: false, // 不集成 Nodejs

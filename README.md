@@ -51,11 +51,19 @@ electron-packager . MohuAPP   --out ../../OutApp/ --electron-version 2.0.4 --ove
 
 * If you find some bugs in this project, please create a report [here](https://github.com/Xmader/mohu/issues) to help us improve 
 
+## Update History
+
+[Read](update_history.md)
+
 ## With Special Thanks to
 
 > This project references some of their codes when developing
 
 * [Hydrogen](https://github.com/Xmader/hydrogen/tree/linux) (Referenced its landing page)
+
+<!-- * [Mogicians Manual](https://github.com/naco-siren/mogicians_manual_public_release) (This project includes Mogicians Manual) -->
+
+* [angry.im](https://angry.im/) (This project uses angry.im's continuing-life(xuming) API)
 
 * [@hahaxixi](https://github.com/hahaxixi) (This project includes his three small games)
 
