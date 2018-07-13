@@ -5,10 +5,6 @@ const add_0 = (i) => {
     return i
 }
 
-const init_clock = () => {
-
-}
-
 const update_clock = () => {
     var y = add_0(now.getFullYear())
     var mo = add_0(now.getMonth())

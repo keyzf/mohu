@@ -36,10 +36,10 @@ const formatTime = (t) => {
     return ret.trim()
 }
 
-const get_increased_time = (callback) => { // 获取已续命时间 单位:秒
+const get_increased_time = () => { // 获取已续命时间 单位:秒
     if ($) {
         $.get("https://angry.im/l/life", function (data) {
-            callback(parseInt(data))
+            document.getElementById("time").innerText = formatTime(parseInt(data))
         })
     }
     else {
@@ -55,21 +55,12 @@ const get_increased_time = (callback) => { // 获取已续命时间 单位:秒
                 let rawData = '';
                 res.on('data', (chunk) => { rawData += chunk; });
                 res.on('end', () => {
-                    callback(parseInt(rawData))
+                    document.getElementById("time").innerText = formatTime(parseInt(rawData))
                 });
 
             }
         })
     }
-}
-
-const updateSeconds = () => {
-
-    get_increased_time((data) => {
-        time = formatTime(data)
-        document.getElementById("time").innerText = time
-    })
-
 }
 
 const increase_time = () => {
@@ -97,8 +88,8 @@ const increase_time = () => {
     }
 }
 
-setInterval(updateSeconds, 1000)
-updateSeconds()
+setInterval(get_increased_time, 1000)
+get_increased_time()
 
 
 
