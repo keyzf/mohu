@@ -1,0 +1,125 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>膜法指南</title>
+    <link href="bootstrap-material-design.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
+    <style>
+        .bg-primary {
+            background-color: #2196F3 !important;
+        }
+
+        body {
+            background-size: cover;
+            font-family: "Microsoft YaHei", 微软雅黑;
+            /*background-color: #27ae60;*/
+        }
+
+        .top-nav {
+            padding-top: 0.5em;
+            padding-bottom: 0.5em;
+        }
+
+        .navbar-brand {
+            margin-left: 1rem;
+        }
+
+        .fa-graduation-cap {
+            margin-right: 2rem;
+        }
+
+        .blue {
+            color: #2196F3
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0px;
+            width: 100%;
+            height: 56px;
+            border-top: 1px solid rgba(0, 0, 0, 0.12);
+            background-color: white;
+            color: #747473;
+            font-size: 1.25rem;
+            /*padding-top: 0.5em;
+            padding-bottom: 0.5em;*/
+        }
+
+        .bottom-nav a {
+            color: #747473;
+            font-size: 1em !important;
+            padding-top: 13px !important;
+            padding-bottom: 0.5em;
+        }
+
+        .bottom-nav a:hover {
+            color: #2196F3;
+        }
+
+        .bottom-nav a.active {
+            color: #2196F3 !important;
+        }
+
+        .list-group-item {
+            border-bottom: 1px solid rgba(0, 0, 0, .12);
+            /*padding-top: 24px;
+            padding-bottom: 24px;*/
+            
+        }
+        .list-group{
+            padding-top: 0px;
+            padding-bottom: 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-primary top-nav">
+        <span class="navbar-brand">
+            <i class="fa fa-graduation-cap" aria-hidden="true"></i> 膜法指南
+        </span>
+    </nav>
+    <div class="container">
+        <p> &nbsp;</p>
+        <div class="card-deck" id="card-deck">
+        </div>
+        <p> &nbsp;</p>
+        <p> &nbsp;</p>
+    </div>
+
+
+    <ul class="nav nav-pills nav-fill bottom-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="?type=shuo" id="shuo">
+                <i class="fa fa-microphone" aria-hidden="true"></i> &nbsp;说</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="?type=xue" id="xue">
+                <i class="fa fa-book" aria-hidden="true"></i> &nbsp;学</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="?type=dou" id="dou">
+                <i class="fa fa-smile-o" aria-hidden="true"></i> &nbsp;逗</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="?type=chang" id="chang">
+                <i class="fa fa-music" aria-hidden="true"></i> &nbsp;唱</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="?type=video" id="video">
+                <i class="fa fa-film" aria-hidden="true"></i> &nbsp;赏</a>
+        </li>
+    </ul>
+    <script src="jquery.js"></script>
+    <script src="https://cdn.bootcss.com/underscore.js/1.9.0/underscore-min.js"></script>
+    <script src="index.js"></script>
+    <script src="https://cdn.bootcss.com/popper.js/1.14.3/popper.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-material-design/4.0.2/bootstrap-material-design.umd.min.js"></script>
+    <script>$(document).ready(function () { $('body').bootstrapMaterialDesign(); });</script>
+
+</body>
+
+</html>
