@@ -1,4 +1,3 @@
-const https = require('https');
 
 const formatTime = (t) => {
     if (t == 0) return "0s"
@@ -43,23 +42,7 @@ const get_increased_time = () => { // 获取已续命时间 单位:秒
         })
     }
     else {
-        https.get("https://angry.im/l/life", (res) => {
-            const { statusCode } = res;
-            const contentType = res.headers['content-type'];
-
-            if (statusCode !== 200) {
-                throw new Error('请求失败。' + `状态码: ${statusCode}`);
-            }
-            else {
-                res.setEncoding('utf8');
-                let rawData = '';
-                res.on('data', (chunk) => { rawData += chunk; });
-                res.on('end', () => {
-                    document.getElementById("time").innerText = formatTime(parseInt(rawData))
-                });
-
-            }
-        })
+        console.error("加载jQuery失败, 你们这样子啊, 是不行的!")
     }
 }
 
@@ -72,19 +55,8 @@ const increase_time = () => {
         })
     }
     else {
-        https.request({ hostname: 'angry.im', path: '/p/life', method: 'POST' }, (res) => {
-            const { statusCode } = res;
-            const contentType = res.headers['content-type'];
-
-            if (statusCode !== 200) {
-                throw new Error('请求失败。' + `状态码: ${statusCode}`);
-            }
-            else {
-                time = formatTime(parseInt(data))
-                document.getElementById("time").innerText = time
-                console.log("+1s成功!")
-            }
-        })
+        console.error("加载jQuery失败, 你们这样子啊, 是不行的!")
+        
     }
 }
 
