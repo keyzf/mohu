@@ -84,7 +84,10 @@ const get_sudo_pswd = () => {
         title: "请输入您的sudo密码 (开机密码)",
         icon: path.join(__dirname, 'logo.png'),
         width: 600,
-        height: 100
+        height: 100,
+        resizable:false,
+        maximizable:false,
+        alwaysOnTop:true
     })
 
     sudo_pswd_win.loadURL(`file://${__dirname}/sudo_passwd.html`)
