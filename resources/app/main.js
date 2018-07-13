@@ -267,7 +267,7 @@ function createWindow() {
             mainWindow.focus();
         });
 
-        mainWindow.webContents.on('did-finish-load', () => {
+        mainWindow.webContents.on('did-navigate', () => {
             refresh_menu()
 
         });
