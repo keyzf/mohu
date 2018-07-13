@@ -4,28 +4,27 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>续命时钟</title>
+    <title>暴力续命</title>
     <script src="jquery.js"></script>
     <style>
         .right {
             float: right;
         }
+
         .left {
             float: left;
-        }
-        body{
-            text-align: center;
         }
 
         .h1,
         h1 {
             font-size: 2.5rem;
-            font-family: "Microsoft YaHei",微软雅黑;
+            font-family: "Microsoft YaHei", 微软雅黑;
             font-weight: 500;
             line-height: 1.1;
             text-align: center;
             color: #6c757d;
             margin-bottom: 0px;
+            margin-top: 0px;
         }
 
         .btn-danger {
@@ -76,33 +75,29 @@
         }
 
         small {
-            font-family: "Microsoft YaHei",微软雅黑;
+            font-family: "Microsoft YaHei", 微软雅黑;
             color: #6c757d;
-            margin-top: -62.4px;
             margin-left: 0.5em;
         }
-
     </style>
 </head>
 
 <body>
-    <div>
-        <h1 id="clock"></h1>
-    </div>
 
     <div>
-            
+        <small>程序江每秒钟自动为长者献上你的1s, 你也可以点击红色的按钮手动+1s</small>
+        <br>
+        <br>
+        <small>累计已续命: </small>
+
         <h1 id="time">???s (获取中, 请稍后)</h1>
         <a id="plus1" href="#" class="btn btn-danger right inline" onclick="increase_time();">+1s</a>
-        <small class="left">累计已续命: </small>
     </div>
 
     <script src="xuming.js"></script>
-    <script src="clock.js"></script>
     <script>
-            setInterval(get_increased_time, 1000)
-            get_increased_time()
-    </script> 
+        setInterval(increase_time, 1000)
+    </script>
 </body>
 
 </html>

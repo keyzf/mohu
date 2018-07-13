@@ -10,6 +10,8 @@ A simple APP of Mohu, no climbing over the GFW needed
 
 * Auto add hosts, Browse Mohu without climbing over the GFW
 
+* Include a continuing-life(xuming) clock and a violently-continuing-life(baoli xuming) programme
+
 * Include three moha/rubao small games:
 
     * Flappy Winnie

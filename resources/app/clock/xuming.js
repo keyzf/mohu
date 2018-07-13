@@ -59,10 +59,3 @@ const increase_time = () => {
         
     }
 }
-
-setInterval(get_increased_time, 1000)
-get_increased_time()
-
-
-
-

@@ -37,6 +37,22 @@ app.on('ready', createWindow);
 // const isDev = true
 const isDev = process.env.NODE_ENV === "development" || process.env.DEBUG_PROD === "true";
 
+const open_clock_win = (t) => {
+    clock_win = new BrowserWindow({
+        // frame: false,
+        title: t=="violent"?"暴力续命":"续命时钟",
+        icon: path.join(__dirname, 'logo.png'),
+        width: 600,
+        height: t=="violent"?120:150,
+        resizable: false,
+        maximizable: false,
+        alwaysOnTop: true,
+        useContentSize: true
+    })
+    clock_win.setMenu(null)
+    clock_win.loadURL(t=="violent"?`file://${__dirname}/clock/violent.html`:`file://${__dirname}/clock/clock.html`)
+}
+
 const template = [
     {
         label: "页面",
@@ -94,6 +110,19 @@ const template = [
                 }
             },
             {
+                label: "续命",
+                submenu: [
+                    {
+                        label: "续命时钟",
+                        click:  () => {open_clock_win()}
+                    },
+                    {
+                        label: "暴力续命",
+                        click:  () => {open_clock_win("violent")}
+                    },
+                ]
+            },
+            {
                 label: "小游戏",
 
                 submenu: [
@@ -123,23 +152,7 @@ const template = [
     },
     {
         label: "续命时钟",
-
-        // accelerator: "Ctrl+M",
-        click: () => {
-            clock_win = new BrowserWindow({
-                // frame: false,
-                title: "续命时钟",
-                icon: path.join(__dirname, 'logo.png'),
-                width: 600,
-                height: 150,
-                resizable:false,
-                maximizable:false,
-                alwaysOnTop:true,
-                useContentSize:true
-            })
-            clock_win.setMenu(null)
-            clock_win.loadURL(`file://${__dirname}/clock/clock.html`)
-        }
+        click:  () => {open_clock_win()}
     },
     {
         label: '视图',
