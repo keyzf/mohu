@@ -138,7 +138,7 @@ const template = [
                 useContentSize:true
             })
             clock_win.setMenu(null)
-            clock_win.loadURL(`file://${__dirname}/clock.html`)
+            clock_win.loadURL(`file://${__dirname}/clock/clock.html`)
         }
     },
     {
