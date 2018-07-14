@@ -19,9 +19,15 @@ const init_video_modal = (src, title) => {
     $("#m_title").text(title)
     $("#m_body").html(`<video src="${src}" preload="Metadata" controls></video>`)
     $("#copy").hide()
-    $(".download_video").remove()
-    $(".modal-footer").prepend(`<a href="${src}" target="_blank" class="btn btn-primary download_video">下载视频</a>`)
+    if (is_Firefox) {
+        $(".download_video").remove()
+        $(".modal-footer").prepend(`<a href="${src}" target="_blank" class="btn btn-primary download_video">下载视频</a>`)
+    }
 }
+
+const is_electron_app = navigator.userAgent.indexOf("Electron") > -1
+const is_Firefox = navigator.userAgent.indexOf("Firefox") > -1;
+const is_Chrome = navigator.userAgent.indexOf("Chrome") > -1;
 
 var t = getArgs()["type"] || "shuo"
 
@@ -51,7 +57,7 @@ $.get("https://mohu.oss-cn-shanghai.aliyuncs.com/" + t + ".json", (data) => {
 
         for (var a = 0; a < items.length; a++) {
             if (t == "chang") {
-                item_html += `<li class="list-group-item grey">${data[key][items[a]]}<a href="${data["url"]}${items[a]}.mp3" target="_blank" class="download_music"><i class="fa fa-download" aria-hidden="true"></i></a><audio src="${data["url"]}${items[a]}.mp3" controls>
+                item_html += `<li class="list-group-item grey">${data[key][items[a]]}<a href="${data["url"]}${items[a]}.mp3" target="_blank" class="download_music"><i class="fa fa-download" aria-hidden="true"></i></a><audio class="audio${is_Firefox?"_Firefox":""}" src="${data["url"]}${items[a]}.mp3" controls>
                 </audio></li>`
             }
             else {
@@ -73,6 +79,9 @@ $.get("https://mohu.oss-cn-shanghai.aliyuncs.com/" + t + ".json", (data) => {
     </div>
     <p> &nbsp;</p>`;
         card_deck.append(html);
+        if (!is_Firefox) {
+            $(".download_music").hide()
+        }
     }
 
 
