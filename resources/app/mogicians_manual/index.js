@@ -9,6 +9,11 @@ const getArgs = () => {
     return args;
 }
 
+const init_modal= (key,a) => {
+    $("#m_title").text(json[key]["titles"][a])
+    $("#m_body").html(json[key]["contents"][a].replace(/\n/g,"</p><p>"))
+}
+
 var t = getArgs()["type"] || "shuo"
 
 var link = $("#" + t)
@@ -16,8 +21,10 @@ link.addClass('active');
 
 var json
 $.get("https://mohu.oss-cn-shanghai.aliyuncs.com/" + t + ".json", (data) => {
-    keys = _.keys(data)
+    json = data
+    var keys = _.keys(data)
     var card_deck = $("#card-deck")
+    
 
     for (var i=0; i <keys.length; i++) {
         var key = keys[i]
@@ -26,7 +33,7 @@ $.get("https://mohu.oss-cn-shanghai.aliyuncs.com/" + t + ".json", (data) => {
 
 
         for (var a=0; a < items.length; a++) {
-            item_html += `<li class="list-group-item"><a>${items[a]}</a></li>`
+            item_html += `<li class="list-group-item"><a data-toggle="modal" href="#modal" data-target="#modal" onclick="init_modal('${key}',${a});">${items[a]}</a></li>`
         }
 
         var html = `
@@ -35,7 +42,8 @@ $.get("https://mohu.oss-cn-shanghai.aliyuncs.com/" + t + ".json", (data) => {
         <ul class="list-group list-group-flush">
             ${item_html}
         </ul>
-    </div>`;
+    </div>
+    <p> &nbsp;</p>`;
         card_deck.append(html);
     }
 

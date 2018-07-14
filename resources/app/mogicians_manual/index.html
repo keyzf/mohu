@@ -4,6 +4,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="icon.png">
+    <link rel="shortcut icon" href="icon.png">
     <title>膜法指南</title>
     <link href="bootstrap-material-design.min.css" rel="stylesheet">
     <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
@@ -21,6 +23,10 @@
         .top-nav {
             padding-top: 0.5em;
             padding-bottom: 0.5em;
+            position: fixed;
+            top: 0px;
+            width: 100%;
+            z-index: 1039;
         }
 
         .navbar-brand {
@@ -46,6 +52,7 @@
             font-size: 1.25rem;
             /*padding-top: 0.5em;
             padding-bottom: 0.5em;*/
+            z-index: 1039;
         }
 
         .bottom-nav a {
@@ -67,11 +74,30 @@
             border-bottom: 1px solid rgba(0, 0, 0, .12);
             /*padding-top: 24px;
             padding-bottom: 24px;*/
-            
         }
-        .list-group{
+
+        .list-group {
             padding-top: 0px;
             padding-bottom: 0px;
+        }
+
+        #card-deck a {
+            color: #747473;
+        }
+
+        #card-deck a:hover {
+            color: #2196F3;
+        }
+
+        .btn-primary {
+            color: #2196F3 !important;
+        }
+
+        .navbar-close{
+            font-size: 20px;
+            margin-right: 1rem;
+            color: white;
+            display: none;
         }
     </style>
 </head>
@@ -81,12 +107,16 @@
         <span class="navbar-brand">
             <i class="fa fa-graduation-cap" aria-hidden="true"></i> 膜法指南
         </span>
+     <span class="navbar-close" onclick="window.close()">
+        <i class="fa fa-times" aria-hidden="true"></i>
+    </span>
     </nav>
     <div class="container">
         <p> &nbsp;</p>
-        <div class="card-deck" id="card-deck">
-        </div>
         <p> &nbsp;</p>
+        <!-- card-columns  class="card-deck" -->
+        <div id="card-deck">
+        </div>
         <p> &nbsp;</p>
     </div>
 
@@ -113,11 +143,32 @@
                 <i class="fa fa-film" aria-hidden="true"></i> &nbsp;赏</a>
         </li>
     </ul>
+    <div class="modal" tabindex="-1" role="dialog" id="modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="m_title"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="$('#modal').modal('hide')">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="m_body" style="text-indent:2em; "></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="copy()">复制到剪贴板</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="$('#modal').modal('hide')">关闭</button>
+                </div>
+            </div>
+        </div>
+        <p> &nbsp;</p>
+    </div>
+
     <script src="jquery.js"></script>
     <script src="https://cdn.bootcss.com/underscore.js/1.9.0/underscore-min.js"></script>
     <script src="index.js"></script>
-    <script src="https://cdn.bootcss.com/popper.js/1.14.3/popper.js"></script>
-    <script src="https://cdn.bootcss.com/bootstrap-material-design/4.0.2/bootstrap-material-design.umd.min.js"></script>
+    <script src="https://cdn.bootcss.com/popper.js/1.12.6/umd/popper.js"></script>
+    <script src="bootstrap-material-design.js"></script>
     <script>$(document).ready(function () { $('body').bootstrapMaterialDesign(); });</script>
 
 </body>
