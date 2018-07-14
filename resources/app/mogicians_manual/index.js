@@ -12,7 +12,7 @@ const getArgs = () => {
 const init_modal = (key, a) => {
     $("#m_title").text(json[key]["titles"][a])
     $("#m_body").html(json[key]["contents"][a].replace(/\n/g, "</p><p>"))
-    $("#m_unformatted_body").text(json[key]["contents"][a])
+    $("#m_unformatted_body")[0].value = json[key]["contents"][a]
 }
 
 const init_video_modal = (src, title) => {
@@ -57,7 +57,7 @@ $.get("https://mohu.oss-cn-shanghai.aliyuncs.com/" + t + ".json", (data) => {
 
         for (var a = 0; a < items.length; a++) {
             if (t == "chang") {
-                item_html += `<li class="list-group-item grey">${data[key][items[a]]}<a href="${data["url"]}${items[a]}.mp3" target="_blank" class="download_music"><i class="fa fa-download" aria-hidden="true"></i></a><audio class="audio${is_Firefox?"_Firefox":""}" src="${data["url"]}${items[a]}.mp3" controls>
+                item_html += `<li class="list-group-item grey">${data[key][items[a]]}<a href="${data["url"]}${items[a]}.mp3" target="_blank" class="download_music"><i class="fa fa-download" aria-hidden="true"></i></a><audio class="audio${is_Firefox ? "_Firefox" : ""}" src="${data["url"]}${items[a]}.mp3" controls>
                 </audio></li>`
             }
             else {
