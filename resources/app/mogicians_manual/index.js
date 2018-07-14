@@ -19,6 +19,7 @@ const init_video_modal = (src, title) => {
     $("#m_title").text(title)
     $("#m_body").html(`<video src="${src}" preload="Metadata" controls></video>`)
     $("#copy").hide()
+    $(".modal-footer").prepend(`<a href="${src}" target="_blank" class="btn btn-primary">下载视频</a>`)
 }
 
 var t = getArgs()["type"] || "shuo"
