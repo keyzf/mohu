@@ -12,6 +12,8 @@
 
 * 内置一个续命时钟和一个暴力续命程序
 
+* 内置一个 好几百个教授一致通过 的 `膜法指南`
+
 * 内置三个镆铪/乳苞小游戏:
 
     * Flappy Winnie
@@ -63,7 +65,7 @@ electron-packager . MohuAPP   --out ../../OutApp/ --electron-version 2.0.4 --ove
 
 * [Hydrogen](https://github.com/Xmader/hydrogen/tree/linux) (参考了其landing页面)
 
-<!-- * [膜法指南](https://github.com/naco-siren/mogicians_manual_public_release) (本项目内置了膜法指南) -->
+* [膜法指南](https://github.com/naco-siren/mogicians_manual_public_release) (本项目内置了膜法指南)
 
 * [angry.im](https://angry.im/) (本项目使用了angry.im的续命API)
 
