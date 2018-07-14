@@ -15,6 +15,12 @@ const init_modal = (key, a) => {
     $("#m_unformatted_body").text(json[key]["contents"][a])
 }
 
+const init_video_modal = (src, title) => {
+    $("#m_title").text(title)
+    $("#m_body").html(`<video src="${src}" preload="Metadata" controls></video>`)
+    $("#copy").hide()
+}
+
 var t = getArgs()["type"] || "shuo"
 
 var link = $("#" + t)
@@ -25,14 +31,14 @@ $.get("https://mohu.oss-cn-shanghai.aliyuncs.com/" + t + ".json", (data) => {
     json = data
     var keys = _.keys(data)
     var card_deck = $("#card-deck")
-    if (t == "chang") {
+    if (t == "chang" || t == "videos") {
         keys.shift()
     }
 
     for (var i = 0; i < keys.length; i++) {
         var key = keys[i]
 
-        if (t == "chang") {
+        if (t == "chang" || t == "videos") {
             var items = _.keys(data[key])
         } else {
             var items = data[key]["titles"]
@@ -43,11 +49,16 @@ $.get("https://mohu.oss-cn-shanghai.aliyuncs.com/" + t + ".json", (data) => {
 
         for (var a = 0; a < items.length; a++) {
             if (t == "chang") {
-                item_html += `<li class="list-group-item grey">${ data[key][items[a]]}<audio src="${data["url"]}${items[a]}.mp3" controls>
+                item_html += `<li class="list-group-item grey">${data[key][items[a]]}<audio src="${data["url"]}${items[a]}.mp3" controls>
                 </audio></li>`
             }
             else {
-                item_html += `<li class="list-group-item"><a data-toggle="modal" href="#modal" data-target="#modal" onclick="init_modal('${key}',${a});">${items[a]}</a></li>`
+                if (t == "videos") {
+                    item_html += `<li class="list-group-item grey"><a data-toggle="modal" href="#modal" data-target="#modal" onclick="init_video_modal('${json["url"]}${items[a]}','${data[key][items[a]]}');">${data[key][items[a]]}</a></li>`
+                }
+                else {
+                    item_html += `<li class="list-group-item"><a data-toggle="modal" href="#modal" data-target="#modal" onclick="init_modal('${key}',${a});">${items[a]}</a></li>`
+                }
             }
         }
 
@@ -65,4 +76,8 @@ $.get("https://mohu.oss-cn-shanghai.aliyuncs.com/" + t + ".json", (data) => {
 
 
 
+})
+
+$('#modal').on('hidden.bs.modal', function (e) {
+    $("#m_body").html(" ")
 })
