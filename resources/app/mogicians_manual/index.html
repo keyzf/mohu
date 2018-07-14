@@ -93,7 +93,7 @@
             color: #2196F3 !important;
         }
 
-        .navbar-close{
+        .navbar-close {
             font-size: 20px;
             margin-right: 1rem;
             color: white;
@@ -107,9 +107,9 @@
         <span class="navbar-brand">
             <i class="fa fa-graduation-cap" aria-hidden="true"></i> 膜法指南
         </span>
-     <span class="navbar-close" onclick="window.close()">
-        <i class="fa fa-times" aria-hidden="true"></i>
-    </span>
+        <span class="navbar-close" onclick="window.close()">
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </span>
     </nav>
     <div class="container">
         <p> &nbsp;</p>
@@ -154,9 +154,10 @@
                 </div>
                 <div class="modal-body">
                     <p id="m_body" style="text-indent:2em; "></p>
+                    <span style="display:none;" id="m_unformatted_body"></span>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" onclick="copy()">复制到剪贴板</button>
+                    <button type="button" class="btn btn-primary" onclick="copy()" id="copy">复制到剪贴板</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="$('#modal').modal('hide')">关闭</button>
                 </div>
             </div>
@@ -170,7 +171,7 @@
     <script src="https://cdn.bootcss.com/popper.js/1.12.6/umd/popper.js"></script>
     <script src="bootstrap-material-design.js"></script>
     <script>$(document).ready(function () { $('body').bootstrapMaterialDesign(); });</script>
-
+    <script src="copy.js"></script>
 </body>
 
 </html>

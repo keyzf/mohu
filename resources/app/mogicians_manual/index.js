@@ -12,6 +12,7 @@ const getArgs = () => {
 const init_modal= (key,a) => {
     $("#m_title").text(json[key]["titles"][a])
     $("#m_body").html(json[key]["contents"][a].replace(/\n/g,"</p><p>"))
+    $("#m_unformatted_body").text(json[key]["contents"][a])
 }
 
 var t = getArgs()["type"] || "shuo"

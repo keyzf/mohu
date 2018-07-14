@@ -40,17 +40,45 @@ const isDev = process.env.NODE_ENV === "development" || process.env.DEBUG_PROD =
 const open_clock_win = (t) => {
     clock_win = new BrowserWindow({
         // frame: false,
-        title: t=="violent"?"暴力续命":"续命时钟",
+        title: t == "violent" ? "暴力续命" : "续命时钟",
         icon: path.join(__dirname, 'logo.png'),
         width: 600,
-        height: t=="violent"?120:150,
+        height: t == "violent" ? 120 : 150,
         resizable: false,
         maximizable: false,
         alwaysOnTop: true,
         useContentSize: true
     })
     clock_win.setMenu(null)
-    clock_win.loadURL(t=="violent"?`file://${__dirname}/clock/violent.html`:`file://${__dirname}/clock/clock.html`)
+    clock_win.loadURL(t == "violent" ? `file://${__dirname}/clock/violent.html` : `file://${__dirname}/clock/clock.html`)
+
+    // clock_win.on("close", function (event) {
+    //     if (process.platform === "darwin" && !forceQuit) {
+    //         event.preventDefault();
+    //         clock_win.hide();
+    //     }
+    // })
+}
+
+const open_mogicians_manual = () => {
+    mogicians_manual_win = new BrowserWindow({
+        width: 1100,
+        height: 740,
+        icon: path.join(__dirname, "mogicians_manual", 'icon.png'),
+        title: "膜法指南",
+        webPreferences: {
+            // webSecurity: false,  // 禁用同源策略
+        }
+    })
+    mogicians_manual_win.setMenu(null)
+    mogicians_manual_win.loadURL(`file://${__dirname}/mogicians_manual/index.html`)
+
+    // mogicians_manual_win.on("close", function (event) {
+    //     if (process.platform === "darwin" && !forceQuit) {
+    //         event.preventDefault();
+    //         mogicians_manual_win.hide();
+    //     }
+    // })
 }
 
 const template = [
@@ -114,13 +142,17 @@ const template = [
                 submenu: [
                     {
                         label: "续命时钟",
-                        click:  () => {open_clock_win()}
+                        click: () => { open_clock_win() }
                     },
                     {
                         label: "暴力续命",
-                        click:  () => {open_clock_win("violent")}
+                        click: () => { open_clock_win("violent") }
                     },
                 ]
+            },
+            {
+                label: "膜法指南",
+                click: () => { open_mogicians_manual() }
             },
             {
                 label: "小游戏",
@@ -152,7 +184,11 @@ const template = [
     },
     {
         label: "续命时钟",
-        click:  () => {open_clock_win()}
+        click: () => { open_clock_win() }
+    },
+    {
+        label: "膜法指南",
+        click: () => { open_mogicians_manual() }
     },
     {
         label: '视图',
@@ -320,7 +356,7 @@ function createWindow() {
         mainWindow.on('closed', function (event) {
             mainWindow.removeAllListeners();
             mainWindow = null;
-            app.exit(0);
+            // app.exit(0);
         })
 
         // mainWindow.loadURL(`file://${__dirname}/app.html`);
