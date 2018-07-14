@@ -9,9 +9,9 @@ const getArgs = () => {
     return args;
 }
 
-const init_modal= (key,a) => {
+const init_modal = (key, a) => {
     $("#m_title").text(json[key]["titles"][a])
-    $("#m_body").html(json[key]["contents"][a].replace(/\n/g,"</p><p>"))
+    $("#m_body").html(json[key]["contents"][a].replace(/\n/g, "</p><p>"))
     $("#m_unformatted_body").text(json[key]["contents"][a])
 }
 
@@ -25,16 +25,30 @@ $.get("https://mohu.oss-cn-shanghai.aliyuncs.com/" + t + ".json", (data) => {
     json = data
     var keys = _.keys(data)
     var card_deck = $("#card-deck")
-    
+    if (t == "chang") {
+        keys.shift()
+    }
 
-    for (var i=0; i <keys.length; i++) {
+    for (var i = 0; i < keys.length; i++) {
         var key = keys[i]
-        var items = data[key]["titles"]
+
+        if (t == "chang") {
+            var items = _.keys(data[key])
+        } else {
+            var items = data[key]["titles"]
+        }
+
         var item_html = ""
 
 
-        for (var a=0; a < items.length; a++) {
-            item_html += `<li class="list-group-item"><a data-toggle="modal" href="#modal" data-target="#modal" onclick="init_modal('${key}',${a});">${items[a]}</a></li>`
+        for (var a = 0; a < items.length; a++) {
+            if (t == "chang") {
+                item_html += `<li class="list-group-item grey">${ data[key][items[a]]}<audio src="${data["url"]}${items[a]}.mp3" controls>
+                </audio></li>`
+            }
+            else {
+                item_html += `<li class="list-group-item"><a data-toggle="modal" href="#modal" data-target="#modal" onclick="init_modal('${key}',${a});">${items[a]}</a></li>`
+            }
         }
 
         var html = `
