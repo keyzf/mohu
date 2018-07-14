@@ -25,7 +25,7 @@ const init_video_modal = (src, title) => {
     }
 }
 
-const is_electron_app = navigator.userAgent.indexOf("Electron") > -1
+// const is_electron_app = navigator.userAgent.indexOf("Electron") > -1
 const is_Firefox = navigator.userAgent.indexOf("Firefox") > -1;
 const is_Chrome = navigator.userAgent.indexOf("Chrome") > -1;
 
