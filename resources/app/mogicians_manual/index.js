@@ -51,7 +51,7 @@ $.get("https://mohu.oss-cn-shanghai.aliyuncs.com/" + t + ".json", (data) => {
 
         for (var a = 0; a < items.length; a++) {
             if (t == "chang") {
-                item_html += `<li class="list-group-item grey">${data[key][items[a]]}<audio src="${data["url"]}${items[a]}.mp3" controls>
+                item_html += `<li class="list-group-item grey">${data[key][items[a]]}<a href="${data["url"]}${items[a]}.mp3" target="_blank" class="download_music"><i class="fa fa-download" aria-hidden="true"></i></a><audio src="${data["url"]}${items[a]}.mp3" controls>
                 </audio></li>`
             }
             else {
