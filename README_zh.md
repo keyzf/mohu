@@ -65,7 +65,9 @@ electron-packager . MohuAPP   --out ../../OutApp/ --electron-version 2.0.4 --ove
 
 * [Hydrogen](https://github.com/Xmader/hydrogen/tree/linux) (参考了其landing页面)
 
-* [膜法指南](https://github.com/naco-siren/mogicians_manual_public_release) (本项目内置了膜法指南)
+* [膜法指南 网页版](https://github.com/Xmader/mogicians_manual) (本项目内置了【膜法指南】网页版)
+
+* [【膜法指南】安卓客户端](https://github.com/naco-siren/mogicians_manual_public_release)
 
 * [angry.im](https://angry.im/) (本项目使用了angry.im的续命API)
 

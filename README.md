@@ -65,7 +65,7 @@ electron-packager . MohuAPP   --out ../../OutApp/ --electron-version 2.0.4 --ove
 
 * [Hydrogen](https://github.com/Xmader/hydrogen/tree/linux) (Referenced its landing page)
 
-* [Mogicians Manual](https://github.com/naco-siren/mogicians_manual_public_release) (This project includes Mogicians Manual)
+* [Mogicians Manual](https://github.com/Xmader/mogicians_manual) (This project includes Mogicians Manual)
 
 * [angry.im](https://angry.im/) (This project uses angry.im's continuing-life(xuming) API)
 
