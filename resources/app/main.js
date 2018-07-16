@@ -9,9 +9,7 @@ var { app, BrowserWindow, ipcMain, Menu, shell } = electron;
 let mainWindow = null, landingWindow = null, locale;
 
 app.on('window-all-closed', () => {
-    if (process.platform !== 'darwin') {
-        app.quit();
-    }
+    app.quit();
 });
 
 var forceQuit = false;
@@ -25,10 +23,6 @@ app.on("quit", (ev) => {
 })
 
 app.on('ready', createWindow);
-
-app.on('window-all-closed', () => {
-    app.quit()
-})
 
 // const isDev = true
 const isDev = process.env.NODE_ENV === "development" || process.env.DEBUG_PROD === "true";
