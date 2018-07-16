@@ -42,12 +42,6 @@ const open_clock_win = (t) => {
     clock_win.setMenu(null)
     clock_win.loadURL(t == "violent" ? `file://${__dirname}/clock/violent.html` : `file://${__dirname}/clock/clock.html`)
 
-    // clock_win.on("close", function (event) {
-    //     if (process.platform === "darwin" && !forceQuit) {
-    //         event.preventDefault();
-    //         clock_win.hide();
-    //     }
-    // })
 }
 
 const open_mogicians_manual = () => {
@@ -63,12 +57,6 @@ const open_mogicians_manual = () => {
     mogicians_manual_win.setMenu(null)
     mogicians_manual_win.loadURL(`file://${__dirname}/mogicians_manual/index.html`)
 
-    // mogicians_manual_win.on("close", function (event) {
-    //     if (process.platform === "darwin" && !forceQuit) {
-    //         event.preventDefault();
-    //         mogicians_manual_win.hide();
-    //     }
-    // })
 }
 
 const template = [
@@ -339,7 +327,10 @@ function createWindow() {
         mainWindow.on('closed', function (event) {
             mainWindow.removeAllListeners();
             mainWindow = null;
-            // app.exit(0);
+            
+            if (process.platform === "darwin") {
+                app.exit(0);
+            }
         })
 
         // mainWindow.loadURL(`file://${__dirname}/app.html`);
