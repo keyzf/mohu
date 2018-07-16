@@ -24,12 +24,6 @@ app.on("quit", (ev) => {
     app.exit(0);
 })
 
-app.on('activate', (ev, hasVisibleWindows) => {
-    if (mainWindow) {
-        mainWindow.show()
-    }
-});
-
 app.on('ready', createWindow);
 
 // const isDev = true
@@ -342,13 +336,6 @@ function createWindow() {
         mainWindow.webContents.on('new-window', (event, url) => {
             event.preventDefault()
             mainWindow.webContents.loadURL(url)
-        })
-
-        mainWindow.on("close", function (event) {
-            if (process.platform === "darwin" && !forceQuit) {
-                event.preventDefault();
-                mainWindow.hide();
-            }
         })
 
         mainWindow.on('closed', function (event) {
