@@ -11,6 +11,7 @@ const home_path = process.env[(process.platform === 'win32') ? 'USERPROFILE' : '
 const work_path = path.join(home_path, '.Mohu')
 
 const host = "104.27.146.57 www.mohu.club"
+var cmd_fn
 
 const host_is_existed = (data) => {
     var i = data.indexOf(host);
@@ -106,8 +107,10 @@ const get_sudo_pswd = () => {
             exec(cmd, unix_exec_callback)
         }
         else {
-            let cmd_fn = path.join(work_path, '_restart_net.sh')
+            cmd_fn = path.join(work_path, '_restart_net.sh')
             let cmd = `
+echo "${host}" >> ${sys_hosts_path}
+
 p1=/System/Library/LaunchDaemons/com.apple.mDNSResponder.plist
 if [ -f $p1 ]; then
     launchctl unload -w $p1
@@ -123,7 +126,7 @@ fi
 killall -HUP mDNSResponder
 `
 
-            fs.writeFileSync(cmd_fn, cmd, 'utf-8')
+            fs.writeFileSync(cmd_fn, cmd, {encoding:'utf-8',flag:"w"})
             exec(`echo '${sudo_pswd}' | sudo -S /bin/sh ${cmd_fn}`, unix_exec_callback)
         }
     })
