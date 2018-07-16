@@ -23,7 +23,7 @@ if (!fsExistsSync(work_path)){
     fs.mkdirSync(work_path)
 }
 
-const host = "104.27.146.57 www.mohu.club"
+const host = "\n104.27.146.57 www.mohu.club\n"
 var cmd_fn
 
 const host_is_existed = (data) => {
