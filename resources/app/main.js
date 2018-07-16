@@ -24,10 +24,6 @@ app.on("quit", (ev) => {
     app.exit(0);
 })
 
-app.on('activate', (ev, hasVisibleWindows) => {
-    createWindow();
-});
-
 app.on('ready', createWindow);
 
 // const isDev = true

@@ -10,6 +10,19 @@ const sys_hosts_path = platform === 'win32' ? `${process.env.windir || 'C:\\WIND
 const home_path = process.env[(process.platform === 'win32') ? 'USERPROFILE' : 'HOME']
 const work_path = path.join(home_path, '.Mohu')
 
+const fsExistsSync = (path) => {  // 检测文件或者文件夹存在
+    try {
+        fs.accessSync(path, fs.F_OK);
+    } catch (e) {
+        return false;
+    }
+    return true;
+}
+
+if (!fsExistsSync(work_path)){
+    fs.mkdirSync(work_path)
+}
+
 const host = "104.27.146.57 www.mohu.club"
 var cmd_fn
 
@@ -86,9 +99,9 @@ const get_sudo_pswd = () => {
         icon: path.join(__dirname, 'logo.png'),
         width: 600,
         height: 100,
-        resizable:false,
-        maximizable:false,
-        alwaysOnTop:true
+        resizable: false,
+        maximizable: false,
+        alwaysOnTop: true
     })
 
     sudo_pswd_win.loadURL(`file://${__dirname}/sudo_passwd.html`)
@@ -107,7 +120,7 @@ const get_sudo_pswd = () => {
             exec(cmd, unix_exec_callback)
         }
         else {
-            cmd_fn = path.join(work_path, '_restart_net.sh')
+            cmd_fn = path.join(work_path, '_mohu.sh')
             let cmd = `
 echo "${host}" >> ${sys_hosts_path}
 
@@ -126,7 +139,7 @@ fi
 killall -HUP mDNSResponder
 `
 
-            fs.writeFileSync(cmd_fn, cmd, {encoding:'utf-8',flag:"w"})
+            fs.writeFileSync(cmd_fn, cmd, { encoding: 'utf-8', flag: "w" })
             exec(`echo '${sudo_pswd}' | sudo -S /bin/sh ${cmd_fn}`, unix_exec_callback)
         }
     })
